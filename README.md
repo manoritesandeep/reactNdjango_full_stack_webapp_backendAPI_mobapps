@@ -1,4 +1,4 @@
-This course is mainly based on Django and React and React Native but we will cover much more than just these frameworks. 
+This project course is mainly based on Django and React and React Native but we will cover much more than just these frameworks. 
 We will build full applications including backend restful API, front-end web app and mobile apps on both Android and iOS.
 
 We will discover how to make a user authentication (register and login users), 
