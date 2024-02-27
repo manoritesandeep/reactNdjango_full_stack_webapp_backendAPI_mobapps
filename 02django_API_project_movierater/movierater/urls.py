@@ -17,8 +17,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import include
+from rest_framework.authtoken.views import obtain_auth_token
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/", include("api.urls")),
+    # good to have login on the main url page, even though we can have it on app level
+    path("auth/", obtain_auth_token),
 ]

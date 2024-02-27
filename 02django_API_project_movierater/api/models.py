@@ -8,6 +8,20 @@ class Movie(models.Model):
     title = models.CharField(max_length=40)
     description = models.TextField(max_length=500)
 
+    def num_movies_ratings(self):
+        ratings = Rating.objects.filter(movie=self)
+        return len(ratings)
+
+    def avg_movie_rating(self):
+        sum = 0
+        ratings = Rating.objects.filter(movie=self)
+        for rating in ratings:
+            sum += rating.stars
+        if sum > 0:
+            return sum / len(ratings)
+        else:
+            return "Not ratings available"
+
 
 class Rating(models.Model):
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
