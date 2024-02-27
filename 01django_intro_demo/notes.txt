@@ -1,0 +1,9 @@
+pip install Django
+
+
+cmd:
+-- django-admin startapp app_name_here  # Start new App
+-- Add to settings.py file --> python manage.py makemigrations # Create migration
+-- python manage.py migrate # Commit migration, apply to the database
+-- python manage.py createsuperuser # create SUPERUSER (admin)
+--

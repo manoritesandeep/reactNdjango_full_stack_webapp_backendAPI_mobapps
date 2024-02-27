@@ -1,0 +1,18 @@
+pip install Django
+
+
+cmd:
+# Create project
+-- django-admin startproject movierater .
+
+# Create app
+-- django-admin startapp app_name_here # Start new App
+-- django-admin startapp api
+
+# Setting files have initial libraries to migrate so,
+-- python manage.py migrate
+
+-- Add to settings.py file --> run python manage.py makemigrations # Create migration
+-- python manage.py migrate # Commit migration, apply to the database
+-- python manage.py createsuperuser # create SUPERUSER (admin)
+--

@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>This is H1 heading tag for first template html file.</h1>
+    <h2>This is the H2 heading for the first template html file.</h2>
+    <h3>This H3 heading has dynamic data passed: {{ books_data }}.<br>
+        Below, we break down the data into components.</h3>
+
+    {% for book in books_data %}
+    <h3> All book records: <br> ID: {{book.id}} Book Title: {{book.title}} Is Published: {{book.is_published}} </h3>
+        {% if book.is_published == True %}
+            <h3> Book Id: {{book.id}} having Book title: {{book.title}}. <br> Is Published: {{book.is_published}} </h3>
+        {% endif %}
+    {% endfor %}
+</body>
+</html>
