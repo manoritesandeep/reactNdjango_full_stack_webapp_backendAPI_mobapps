@@ -4,3 +4,5 @@ node -v
 # check npm version
 npm -v
 
+# create application
+npx create-react-app <your_app_name_here>
