@@ -8,13 +8,23 @@ import reportWebVitals from './reportWebVitals';
 import {Route, Routes, BrowserRouter} from 'react-router-dom';
 // import ReactDOM from 'react-dom';
 
+// Create a context
+const context = React.createContext();
+// export consumer context --> send vals, data from Context Provider to this Content Consumer. Using this the new_animals list becomes available to all other pages... 
+// This creates a global variable that can be used. Do not overdo might result in slowing down the whole site. 
+export const CtxConsumer = context.Consumer 
+
+const new_animals = ['elephant', 'lion', 'snake', 'mice']
+
 const routing = (
   <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<App />} />
-      <Route path="/header" element={<Header />} />
-      <Route path="/footer" element={<Footer />} />
-    </Routes>
+    <context.Provider value={{animals: new_animals}}>
+      <Routes>
+        <Route exact path="/" element={<App />} />
+        <Route path="/header" element={<Header />} />
+        <Route path="/footer" element={<Footer />} />
+      </Routes>
+    </context.Provider>
   </BrowserRouter>
 )
 // # used older versions.

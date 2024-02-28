@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { CtxConsumer } from '../index';
 
 class Footer extends Component{
 
@@ -29,7 +30,7 @@ class Footer extends Component{
 
     render() {
 
-        const animals = ['cat', 'dog', 'homer', 'horse']
+        // const animals = ['cat', 'dog', 'homer', 'horse']
 
         return( 
                 <React.Fragment>
@@ -47,13 +48,26 @@ class Footer extends Component{
 
                                 <p>For loop in JS</p>
 
-                                { animals.map (animal => {
-                                    return (
+                                <CtxConsumer>
+                                    {(context) => (
                                         <div>
+                                            {context.animals.map(animal => {
+                                                return (
+                                                    <div key={animal}>
+                                                        <h1> The animal is: {animal} </h1>
+                                                    </div>
+                                                )
+                                            })}
+                                        </div>
+                                    )}
+                                </CtxConsumer>
+                                {/* { animals.map (animal => {
+                                    return (
+                                        <div key={animal}>
                                             <h1> The animal is: {animal} </h1>
                                         </div>
                                     )
-                                })}
+                                })} */}
                             </React.Fragment>
                         ) : (
                             <React.Fragment>
