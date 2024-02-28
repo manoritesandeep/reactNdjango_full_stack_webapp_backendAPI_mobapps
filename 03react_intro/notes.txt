@@ -11,3 +11,8 @@ npx create-react-app <your_app_name_here>
 npm install react-router-dom --save
     # add to package json but in dev-dependencies, if not available, it will add for us.  
 npm install react-router-dom --save-dev
+
+# style components for react... # CSS for the <Component> Age
+https://www.styled-components.com
+
+
