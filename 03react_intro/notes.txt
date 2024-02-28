@@ -6,3 +6,8 @@ npm -v
 
 # create application
 npx create-react-app <your_app_name_here>
+
+# Add router package to node_modules and dependencies
+npm install react-router-dom --save
+    # add to package json but in dev-dependencies, if not available, it will add for us.  
+npm install react-router-dom --save-dev

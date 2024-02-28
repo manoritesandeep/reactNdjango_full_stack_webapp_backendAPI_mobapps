@@ -7,21 +7,62 @@ class Footer extends Component{
     //     alert("You just clicked a button, welcome to events!")
     // }
 
-    changed() {
-        console.log('changed')
+    state ={
+        name: "",
+        age: 35,
+        isLogin: true
+    }
+
+    componentDidMount() {
+        this.setState({name: "Sam"});
+    }
+
+    // changed() {
+    //     console.log('changed')
+    // }
+
+    changed = evt => {
+        console.log(this.state.name)
+        this.setState({name: evt.target.value});
     }
 
 
     render() {
+
+        const animals = ['cat', 'dog', 'homer', 'horse']
+
         return( 
                 <React.Fragment>
-                   <h2 onClick={this.props.myalert}>
-                        This is the footer component: {this.props.trademark}
-                    </h2>
+                    {
+                        this.state.isLogin===true ? (
+                            <React.Fragment>
+                                <h2 onClick={this.props.myalert}>
+                                    This is the footer component, login is true: {this.props.trademark}
+                                </h2>
 
-                    <p>"onClick" and "onChange" are examples of events</p>
+                                <p>"onClick" and "onChange" are examples of events</p>
 
-                    <input onChange={this.changed} type="text"/>
+                                <input value={this.state.name}
+                                    onChange={this.changed} type="text"/>
+
+                                <p>For loop in JS</p>
+
+                                { animals.map (animal => {
+                                    return (
+                                        <div>
+                                            <h1> The animal is: {animal} </h1>
+                                        </div>
+                                    )
+                                })}
+                            </React.Fragment>
+                        ) : (
+                            <React.Fragment>
+                                <h2>Page Forbidden</h2>
+                                <p>Please login to continue.</p>
+                                <h2>This is the footer component when isLogin is false</h2>
+                            </React.Fragment>
+                        )
+                    }
                 </React.Fragment>
             )
     }
