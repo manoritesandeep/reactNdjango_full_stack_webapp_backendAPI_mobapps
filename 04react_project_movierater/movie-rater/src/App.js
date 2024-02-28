@@ -10,7 +10,8 @@ function App() {
       method: 'GET',
       headers:{
         'Content-Type': 'application/json',
-        'Authorization': 'Token 45cae1e8ffb92de714663b86b5fce0fdd0d4c77b'
+        // 'Authorization': 'Token 45cae1e8ffb92de714663b86b5fce0fdd0d4c77b',
+        'Authorization': 'Token fbcea00e3a28e96a41e8bc4dc4788ebb8e10a65a'
       }
     })
     // take the Response and convert to json
@@ -30,8 +31,8 @@ function App() {
           {/* left col */}
           <div>
             { movies.map( movie => {
-              return <div key={movie}>
-                      <h2>{movie.title}</h2>
+              return <div key={movie.id}>
+                      <h2>{[movie.id, ': ', movie.title]}</h2>
                     </div>
             })}
           </div>
