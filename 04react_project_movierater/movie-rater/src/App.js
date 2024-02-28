@@ -1,23 +1,44 @@
-import logo from './logo.svg';
+import React, {useEffect, useState} from 'react';
 import './App.css';
 
 function App() {
+
+  const [movies, setMovie ] = useState([]) 
+
+  useEffect(()=>{
+    fetch("http://127.0.0.1:8000/api/movies/", {
+      method: 'GET',
+      headers:{
+        'Content-Type': 'application/json',
+        'Authorization': 'Token 45cae1e8ffb92de714663b86b5fce0fdd0d4c77b'
+      }
+    })
+    // take the Response and convert to json
+    .then( resp => resp.json())
+    // set local state
+    .then( resp => setMovie(resp))
+    .catch( error => console.log( error ))
+  }, [])
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1>Movie Rater</h1>        
       </header>
+      <div className='layout'>
+
+          {/* left col */}
+          <div>
+            { movies.map( movie => {
+              return <div key={movie}>
+                      <h2>{movie.title}</h2>
+                    </div>
+            })}
+          </div>
+
+          {/* right col */}
+          <div>Movie details</div>
+        </div>
     </div>
   );
 }
