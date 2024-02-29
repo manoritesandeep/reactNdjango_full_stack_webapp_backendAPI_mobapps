@@ -1,9 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import './App.css';
+import MovieList from './components/movie-list'
+import MovieDetails from './components/movie-details'
 
 function App() {
 
   const [movies, setMovie ] = useState([]) 
+  const [selectedMovie, setSelectedMovie] = useState()
 
   useEffect(()=>{
     fetch("http://127.0.0.1:8000/api/movies/", {
@@ -21,6 +24,12 @@ function App() {
     .catch( error => console.log( error ))
   }, [])
 
+  const movieClicked = movie => {
+    // console.log(movie.title)
+    setSelectedMovie(movie)
+    
+  }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -29,16 +38,14 @@ function App() {
       <div className='layout'>
 
           {/* left col */}
-          <div>
-            { movies.map( movie => {
-              return <div key={movie.id}>
-                      <h2>{[movie.id, ': ', movie.title]}</h2>
-                    </div>
-            })}
-          </div>
-
+          <MovieList movies={movies} movieClicked= {movieClicked}/>
+          {/* we move the following logic to its individual componenet (movie-list.js) { movies.map( movie => {
+            return <div key={movie.id}>
+                    <h2>{[movie.id, ': ', movie.title]}</h2>
+                  </div>
+          })} */}
           {/* right col */}
-          <div>Movie details</div>
+          <MovieDetails movie={selectedMovie}/>
         </div>
     </div>
   );

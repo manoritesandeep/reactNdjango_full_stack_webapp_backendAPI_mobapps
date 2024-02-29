@@ -15,4 +15,5 @@ npm install react-router-dom --save-dev
 # style components for react... # CSS for the <Component> Age
 https://www.styled-components.com
 
+# we can only export one default per component file
 
