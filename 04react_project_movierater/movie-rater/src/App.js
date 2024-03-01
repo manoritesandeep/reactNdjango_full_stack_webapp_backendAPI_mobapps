@@ -26,18 +26,19 @@ function App() {
     .catch( error => console.log( error ))
   }, [])
 
-  const movieClicked = movie => {
-    // console.log(movie.title)
-    setSelectedMovie(movie)
-    
-  }
+  // const movieClicked = movie => {
+  //   // console.log(movie.title)
+  //   setSelectedMovie(movie)
+  // }
 
   const loadMovie = movie => {
-    setSelectedMovie(movie)
+    setSelectedMovie(movie);
+    setEditedMovie(null);
   }
 
   const editClicked = movie => {
-    setEditedMovie(movie)
+    setEditedMovie(movie);
+    setSelectedMovie(null);
   }
 
   return (
@@ -48,7 +49,7 @@ function App() {
       <div className='layout'>
 
           {/* left col */}
-          <MovieList movies={movies} movieClicked= {movieClicked} editClicked={editClicked} />
+          <MovieList movies={movies} movieClicked= {loadMovie} editClicked={editClicked} />
           {/* we move the following logic to its individual componenet (movie-list.js) { movies.map( movie => {
             return <div key={movie.id}>
                     <h2>{[movie.id, ': ', movie.title]}</h2>
@@ -56,7 +57,7 @@ function App() {
           })} */}
           {/* right col */}
           <MovieDetails movie={selectedMovie} updateMovie={loadMovie}/>
-          <MovieForm movie={editedMovie} />
+          { editedMovie ? <MovieForm movie={editedMovie} /> : null}
         </div>
     </div>
   );
