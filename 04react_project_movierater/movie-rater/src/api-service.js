@@ -22,6 +22,20 @@ export class API {
         }).then( resp => resp.json())
     }
 
+
+    static getMovies(TOKEN){
+        return fetch("http://127.0.0.1:8000/api/movies/", {
+      method: 'GET',
+      headers:{
+        'Content-Type': 'application/json',
+        // 'Authorization': 'Token 45cae1e8ffb92de714663b86b5fce0fdd0d4c77b',
+        'Authorization': `Token ${TOKEN}`
+      }
+    })
+    // take the Response and convert to json
+    .then( resp => resp.json())
+    }
+
     // Use static so that we can directly call the method from the class
     static updateMovie(mov_id, body, TOKEN) {
         return fetch(`http://127.0.0.1:8000/api/movies/${mov_id}/`, {
