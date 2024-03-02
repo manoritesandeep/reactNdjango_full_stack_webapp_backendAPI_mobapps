@@ -1,4 +1,4 @@
-const TOKEN = "fbcea00e3a28e96a41e8bc4dc4788ebb8e10a65a"
+// const TOKEN = "fbcea00e3a28e96a41e8bc4dc4788ebb8e10a65a"
 
 export class API {
     // get token for user. body input username, password
@@ -13,7 +13,7 @@ export class API {
     }
 
     // Use static so that we can directly call the method from the class
-    static updateMovie(mov_id, body) {
+    static updateMovie(mov_id, body, TOKEN) {
         return fetch(`http://127.0.0.1:8000/api/movies/${mov_id}/`, {
             method:'PUT',
             headers: {
@@ -24,7 +24,7 @@ export class API {
         }).then( resp => resp.json())
     }
 
-    static createMovie( body) {
+    static createMovie( body, TOKEN) {
         return fetch(`http://127.0.0.1:8000/api/movies/`, {
             method:'POST',
             headers: {
@@ -35,7 +35,7 @@ export class API {
         }).then( resp => resp.json())
     }
 
-    static deleteMovie( mov_id ) {
+    static deleteMovie( mov_id , TOKEN) {
         return fetch(`http://127.0.0.1:8000/api/movies/${mov_id}`, {
             method:'DELETE',
             headers: {

@@ -1,11 +1,13 @@
 import React, {useState} from 'react';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 // import {faCoffee} from '@fortawesome/free-solid-svg-icons'
-import {faStar} from '@fortawesome/free-solid-svg-icons'
+import {faStar} from '@fortawesome/free-solid-svg-icons';
+import { useCookies } from 'react-cookie';
 
 function MovieDetails(props) {
 
     const [highlighted, setHighlighted] = useState(-1)
+    const [token] = useCookies(['mr-token']);
 
     let mov = props.movie
 
@@ -18,7 +20,7 @@ function MovieDetails(props) {
       method: 'POST',
       headers:{
         'Content-Type': 'application/json',
-        'Authorization': 'Token fbcea00e3a28e96a41e8bc4dc4788ebb8e10a65a'
+        'Authorization': `Token ${token['mr-token']}`
       },
       // send the updated content using API... convert the rating to string... Add one to offset index
       body: JSON.stringify({stars: rating + 1})
@@ -34,7 +36,7 @@ function MovieDetails(props) {
         method:'GET',
         headers:{
             'Content-Type': 'application/json',
-            'Authorization': 'Token fbcea00e3a28e96a41e8bc4dc4788ebb8e10a65a'    
+            'Authorization': `Token ${token['mr-token']}`    
         }
     })
     .then ( resp => resp.json())
