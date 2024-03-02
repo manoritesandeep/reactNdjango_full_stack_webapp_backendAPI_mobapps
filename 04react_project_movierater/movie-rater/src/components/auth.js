@@ -6,6 +6,7 @@ function Auth() {
 
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
+    const [ isLoginView, setIsLoginView] = useState(true)
 
     // const {token, setToken} = useContext(TokenContext) 
     const [token, setToken] = useCookies(['mr-token']);  // Name cookie - this case 'mr-token'
@@ -22,8 +23,22 @@ function Auth() {
             .catch(error => console.log(error))
     }
 
+    const registerClicked = () => {
+        API.registerUser({username, password})
+            // .then(resp => setToken('mr-token', resp.token))
+            // .then(resp => console.log(resp))
+            
+            // login automatically once new user is registerd.
+            .then(() => loginClicked())
+            .catch(error => console.log(error))
+    }
+
     return (
         <div>
+            { isLoginView ? 
+                <h1>Welcome back! Please continue to Login</h1> : 
+                <h1>Register</h1> 
+                }
             <label htmlFor="username">Username: </label>
             <input 
                 id="username" 
@@ -40,7 +55,18 @@ function Auth() {
                 value={password}
                 onChange={ evt => setPassword(evt.target.value)}
             /><br/>
-            <button onClick={loginClicked}>Login</button>
+            {/* // change button with page Login to Register... */}
+            { isLoginView ? 
+                <button onClick={loginClicked}>Login</button> :
+                <button onClick={registerClicked}>Register</button>
+            }
+            {/* <button onClick={loginClicked}>Login</button> */}
+
+            { isLoginView ? 
+                <p onClick={()=> setIsLoginView(false)}>Don't have an account? Click here to register!</p>
+                : <p onClick={()=> setIsLoginView(true)}>Already have an account with us! Click here to Login!</p> 
+                }
+            {/* when we click the below line, it changes to register i.e setIsLoginView(false) */}            
         </div>
     )
 }
