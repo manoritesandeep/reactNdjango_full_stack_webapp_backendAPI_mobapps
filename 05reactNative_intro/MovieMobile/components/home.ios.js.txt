@@ -1,3 +1,4 @@
+// File has been save as text on purpose. to run remove extension .txt and use per platform.
 import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { Button, FlatList, ScrollView,
