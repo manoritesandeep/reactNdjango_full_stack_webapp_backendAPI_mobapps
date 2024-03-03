@@ -1,0 +1,10 @@
+## create new app
+npx create-expo-app --template
+
+## to start the app.. cd to app folder
+npx expo start -c 
+# OR
+npm start  
+# OR
+yarn start
+
