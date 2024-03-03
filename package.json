@@ -2,5 +2,8 @@
   "dependencies": {
     "env-cmd": "^10.1.0",
     "styled-components": "^6.1.8"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.61"
   }
 }
