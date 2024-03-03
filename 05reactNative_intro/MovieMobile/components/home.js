@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { Button, FlatList, ScrollView,
          StyleSheet, Text, TextInput, 
-         View, Image, ImageBackground } from 'react-native';
+         View, Image, ImageBackground, Platform } from 'react-native';
 
 export default function Home(props) {
     
@@ -10,11 +10,11 @@ export default function Home(props) {
 
     return (
         <View style={styles.home}>            
-            {/* <Image style={{width: '100%', height: 250}}
-                source={require('../assets/apples.jpg')} /> */}
+            <Image style={{width: '100%', height: 250}}
+                source={require('../assets/apples.jpg')} />
             {/* Add image background */}
-            <ImageBackground style={{width: '100%', height: '100%'}}
-                source={require('../assets/apples.jpg')}>
+            {/* <ImageBackground style={{width: '100%', height: '100%'}}
+                source={require('../assets/apples.jpg')}> */}
             <FlatList 
                 data = {[
                     {key: "ByteMe"},
@@ -22,13 +22,15 @@ export default function Home(props) {
                     {key: "ByteMe 2"},
                     {key: "ByteMe 3"},
                     {key: "ByteMe 4"},
-                    {key: "ByteMe 5"},
-                    {key: "ByteMe 6"},
                 ]}
                 renderItem={
                     ({item}) => <Text style={styles.text}>{item.key}</Text>
                 }            
             />
+            <Text>
+                { Platform.OS == 'android' ? 'Platform: Android Device!' : 
+                                "Platform: iOS device!"}
+            </Text>
             
             <ScrollView>
                 {/* Scroll view allows for multiple items but FlatList is best for tabular data. */}
@@ -37,6 +39,7 @@ export default function Home(props) {
                 <Text style={styles.text}>2 {name}</Text>
                 <Text style={styles.text}>3 {name}</Text>
                 <Text style={styles.text}>4 {name}</Text>
+                <Text style={styles.text}>5 {name}</Text>
                 <Text style={styles.text}>last {name}</Text>
                 </ScrollView>
                 
@@ -50,9 +53,9 @@ export default function Home(props) {
 
             <Button 
                 onPress={() => alert(name + " clicked the button!")}
-                title="Click me!"
+                title="Click me for alert!"
             />
-            </ImageBackground>
+            {/* </ImageBackground> */}
         </View>
     );
 }
@@ -60,7 +63,8 @@ export default function Home(props) {
 const styles = StyleSheet.create({
   home: {
     flex: 1,
-    backgroundColor: '#fff',
+    //  to change background based on platform
+    backgroundColor: Platform.OS=='android' ? '#fff': '#00ff00',
     alignItems: 'center',
     justifyContent: 'center',
 //   },

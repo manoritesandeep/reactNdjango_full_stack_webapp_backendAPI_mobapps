@@ -1,0 +1,34 @@
+import React, { useState } from 'react';
+import { StatusBar } from 'expo-status-bar';
+import { Button, FlatList, ScrollView,
+         StyleSheet, Text, TextInput, 
+         View, Image, ImageBackground, Platform } from 'react-native';
+
+export default function Home(props) {
+    
+    const [name, setName] = useState('ByteMe')
+
+    return (
+        <View style={styles.home}>            
+            <Text>This script runs on iOS Platform. File name has .ios.js, making it a platform specifi case</Text>
+        </View>
+    );
+}
+
+const styles = StyleSheet.create({
+  home: {
+    flex: 1,
+    //  to change background based on platform
+    backgroundColor: Platform.OS=='android' ? '#fff': '#00ff00',
+    alignItems: 'center',
+    justifyContent: 'center',
+//   },
+//   name: {
+//     // color:'#00ff00',
+//     marginBottom:30
+  },
+  text: {
+    fontSize: 40,
+    color: 'red'
+  }
+});
