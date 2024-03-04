@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { FlatList, StyleSheet, Text, View, Image } from 'react-native';
+import { FlatList, StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 
-export default function MovieList() {
+export default function MovieList(props) {
 
     // create hooks to get data..
     // const [movies, setMovies] = useState([{title:'movie 1', title:'movie 2', title:'movie 3'}])
@@ -21,6 +21,10 @@ export default function MovieList() {
         .catch( error => console.log(error))
     })
 
+    const movieClicked = movie => {
+        props.navigation.navigate('Detail', {movie: movie, title: movie.title})
+    }
+
     return (
         <View>
             <Image source={require('../assets/movieRater_logo.png')} 
@@ -29,9 +33,11 @@ export default function MovieList() {
             <FlatList
                 data={movies}
                 renderItem={({item}) => (
-                    <View style={styles.item}>
-                        <Text style={styles.itemText}>{item.title}</Text>
-                    </View>
+                    <TouchableOpacity onPress={() => movieClicked(item)}>
+                        <View style={styles.item}>
+                            <Text style={styles.itemText}>{item.title}</Text>
+                        </View>
+                    </TouchableOpacity>
                 )}
                 keyExtractor={(item, index) => index.toString()}
             />
