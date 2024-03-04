@@ -9,6 +9,7 @@ export default function Detail(props) {
     // // get params from parent
     // const myParams = props.navigation.getParam('movie', null)
     const movie = props.navigation.getParam('movie', null);
+    const token = props.navigation.getParam('token', '');
     const [ highlight, setHighlight ] = useState(0);
 
     const rateClicked = () => {
@@ -17,14 +18,15 @@ export default function Detail(props) {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Token fbcea00e3a28e96a41e8bc4dc4788ebb8e10a65a'
+                'Authorization': `Token ${token}`
             },
             body: JSON.stringify({stars: highlight})
         })
+        .then(console.log('rateClicked token print', token))
         .then( resp => resp.json())
         .then( resp => {
             setHighlight(0);
-            Alert.alert("Rating", resp.message);
+            Alert.alert("Rated", resp.message);
         })
         .catch(error => Alert.alert("Error", error));
         // .catch(error => console.log(error));
