@@ -1,21 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { FlatList, StyleSheet, Text, View, Image, Button } from 'react-native';
+import { FlatList, StyleSheet, Text, View, Image, Button, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { TextInput } from 'react-native-gesture-handler';
 
 
 export default function Auth(props) {
 
-
     const [ username, setUsername ] = useState("")
     const [ password, setPassword ] = useState("")
+    const [ regView, setRegView ] = useState(false)
 
     useEffect( () => {
         getData();
-    })
+    }, [])
 
     const auth = () => {
-        fetch(`http://10.10.14.52:8000/auth/`, {
+        if(regView) {
+            fetch(`http://10.10.14.52:8000/api/users/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -28,10 +29,30 @@ export default function Auth(props) {
         // .then( resp => console.log(resp.token))
         .then(resp => {
             console.log('Auth Token', resp.token);
-            saveData(resp.token);
-            props.navigation.navigate("MovieList");
+            // when successfully register set registration mode to false.
+            setRegView(false);
         })
         .catch(error => console.log(error));
+        
+        } else {
+            fetch(`http://10.10.14.52:8000/auth/`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        // body: JSON.stringify({username: username, password: password})
+                        body: JSON.stringify({ username, password })
+                    })
+                    .then( resp => resp.json())
+                    // .then( movie => {console.log(movie)})
+                    // .then( resp => console.log(resp.token))
+                    .then(resp => {
+                        console.log('Auth Token', resp.token);
+                        saveData(resp.token);
+                        props.navigation.navigate("MovieList");
+                    })
+                    .catch(error => console.log(error));
+        }
     };    
        
     const saveData = async (token) => {
@@ -41,6 +62,10 @@ export default function Auth(props) {
         const token = await AsyncStorage.getItem('MR_Token');
         console.log('getData token print', token)
         if(token) props.navigation.navigate("MovieList");
+    }
+
+    const toggleView = () => {
+        setRegView(!regView);
     }
 
     return (
@@ -62,7 +87,11 @@ export default function Auth(props) {
                 secureTextEntry={true}
                 autoCapitalize={'none'}
             />
-            <Button onPress={() => auth()} title="Login" />    
+            <Button onPress={() => auth()} title={regView ? "Register" : "Login" } />
+            <TouchableOpacity onPress={() => toggleView()}>
+                {regView ? <Text style={styles.viewText} >Already have an account? Login here!</Text> : 
+                    <Text style={styles.viewText} >Don't have an account? Register here!</Text>}                
+            </TouchableOpacity>
         </View>
     );
 };
@@ -95,5 +124,12 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     padding: 10,
     margin: 10
+  },
+  viewText: {
+    color: 'white',
+    fontSize: 20,
+    paddingTop: 30,
+    paddingLeft: 10,
+    paddingRight: 10
   }
 });

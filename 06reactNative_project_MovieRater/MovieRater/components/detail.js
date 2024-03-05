@@ -18,7 +18,8 @@ export default function Detail(props) {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Token ${token}`
+                // 'Authorization': `Token ${token}`
+                'Authorization': 'Token fbcea00e3a28e96a41e8bc4dc4788ebb8e10a65a'
             },
             body: JSON.stringify({stars: highlight})
         })

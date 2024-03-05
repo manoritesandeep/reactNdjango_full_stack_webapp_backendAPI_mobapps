@@ -18,14 +18,14 @@ export default function Edit(props) {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Token fbcea00e3a28e96a41e8bc4dc4788ebb8e10a65a'
+                'Authorization': `Token ${token}`
             },
             body: JSON.stringify({title: title, description: description})
             })
             .then( resp => resp.json())
             // .then( movie => {console.log(movie)})
             .then( movie => {
-                props.navigation.navigate("Detail", {movie: movie, title: movie.title, token: token})
+                props.navigation.navigate("Detail", {movie: movie, title: movie.title})
             })
             .catch(error => console.log(error))
             // props.navigation.goBack();
@@ -34,7 +34,7 @@ export default function Edit(props) {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Token fbcea00e3a28e96a41e8bc4dc4788ebb8e10a65a'
+                'Authorization': `Token ${token}`
             },
             body: JSON.stringify({title: title, description: description})
         })
@@ -97,10 +97,11 @@ const removeClicked = (props) => {
         })
         // .then( resp => resp.json())
         .then( resp => {
-            console.log("Response:", resp); // Log the response
+            // console.log("Response:", resp); // Log the response
             // after deleting what to do? got to MovieList
-            props.navigation.navigate("MovieList")
             Alert.alert("Removed!", resp.message);
+            props.navigation.navigate("MovieList")
+            
         })
         .catch(error => console.log(error))
 }
