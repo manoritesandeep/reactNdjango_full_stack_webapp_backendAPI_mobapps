@@ -1,6 +1,4 @@
-This project course is mainly based on Django and React and React Native but we will cover much more than just these frameworks. 
-We will build full applications including backend restful API, front-end web app and mobile apps on both Android and iOS.
-
+Built full applications including backend restful API, front-end web app and mobile apps on both Android and iOS.
 We will discover how to make a user authentication (register and login users), 
 how to create a full CRUD (create, read, update and delete) and how to create our own endpoints. 
 How to communicate between the API and web app. Discover how to style the application and restrict certain parts of it to authenticated users only. All that done with very popular frameworks. 
